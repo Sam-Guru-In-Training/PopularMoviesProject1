@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Popular Movies</string>
+    <string name="error_message">An error has occurred, click options to try again</string>
+    <string name="movie_poster">movie poster</string>
+    <string name="sort_by_popular">sort by most popular</string>
+    <string name="sort_by_top_rated">sort by top rated</string>
+</resources>
