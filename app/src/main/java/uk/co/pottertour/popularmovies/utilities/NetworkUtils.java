@@ -10,6 +10,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
+import uk.co.pottertour.popularmovies.BuildConfig;
+
 /**
  * These utilities will be used to communicate with the weather servers.
  */
@@ -17,7 +19,7 @@ public final class NetworkUtils {
 
     private static final String TAG = NetworkUtils.class.getSimpleName();
 
-    private static final String API_KEY = 
+    private static final String API_KEY = BuildConfig.THE_MOVIE_DB_API_KEY;
     private static final String BASE_URL = "http://api.themoviedb.org/3/movie/";
 
     private static final String IMAGE_BASE_URL = "http://image.tmdb.org/t/p/";

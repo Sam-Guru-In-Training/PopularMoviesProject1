@@ -46,8 +46,8 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapterOnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mRecyclerView = findViewById(R.id.recyclerview_posters);
-        mErrorMessageDisplay = findViewById(R.id.tv_error_message_display);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_posters);
+        mErrorMessageDisplay = (TextView) findViewById(R.id.tv_error_message_display);
 
 
 
@@ -62,6 +62,10 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapterOnCl
             // if we have saved moviesData restore it
             ArrayList<MovieObject> tempMoviesData = savedInstanceState.getParcelableArrayList("moviesData");
             mMoviesData = (MovieObject[]) tempMoviesData.toArray();
+            showMoviesDataView();
+            Log.e("after rotation", "setting data on Adapter");
+            // TODO IS THIS RIGHT?  DOES THE ADAPTER STILL EXIST AT THIS POINT?
+            mMoviesAdapter.setMoviesData(mMoviesData);
         }
 
         else {
@@ -70,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapterOnCl
                 mMoviesAdapter = new MoviesAdapter(this);
                 mRecyclerView.setAdapter(mMoviesAdapter);
 
-                mLoadingIndicator = findViewById(R.id.pb_loading_indicator);
+                mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator);
                 loadMoviesData("popular");
             } else {
                 showErrorMessage();
@@ -103,7 +107,9 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapterOnCl
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList("mMoviesAdapter", mMoviesAdapter.getItems());
+        if(mMoviesData != null) {
+            outState.putParcelableArrayList("mMoviesAdapter", mMoviesAdapter.getItems());
+        }
     }
 
     private void showMoviesDataView() {
